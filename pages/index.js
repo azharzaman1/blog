@@ -5,7 +5,7 @@ import BlogLayout from "../components/Blog/Layout";
 import Blog from "../components/pages/Blog";
 
 export default function Home({ posts }) {
-  console.log(posts);
+  console.log({ posts });
   return (
     <div className="page home-page">
       <Head>
