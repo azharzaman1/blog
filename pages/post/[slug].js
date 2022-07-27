@@ -93,7 +93,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
       post,
       preview,
     },
-    revalidate: 3 * 60 * 60, // 3 - hours
+    revalidate: 60 * 60, // 3 - hours
   };
 };
 
