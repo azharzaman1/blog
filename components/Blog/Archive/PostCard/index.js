@@ -1,10 +1,9 @@
 import React from "react";
-import { FaClock } from "react-icons/fa";
-// import { urlForImage } from "../../../../api/sanity";
+import { useRouter } from "next/router";
+import { urlForImage } from "@lib/sanity";
+import { formatDate, limitString } from "../../../../utils";
 import Heading from "../../../Generic/Heading";
 import Text from "../../../Generic/Text";
-import { formatDate, limitString } from "../../../../utils";
-import { useRouter } from "next/router";
 import PostTimeWidget from "../../Generic/Widgets/PostTime";
 
 const PostCard = ({ post }) => {
@@ -22,7 +21,7 @@ const PostCard = ({ post }) => {
           onClick={() => navigateToPost(post.slug.current)}
         >
           <img
-            // src={urlForImage(post.mainImage).url()}
+            src={urlForImage(post.mainImage).url()}
             alt={post.title}
             className="group-hover:scale-105 transition-transform duration-200"
           />
