@@ -93,7 +93,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
       post,
       preview,
     },
-    revalidate: 60 * 60, // 3 - hours
+    revalidate: false, // on-demand Incremental Static Regeneration(ISR)
   };
 };
 
