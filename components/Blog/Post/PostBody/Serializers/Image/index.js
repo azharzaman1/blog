@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { urlForImage } from "../../../../../../api/sanity";
+import { urlForImage } from "@lib/sanity";
 import Link from "../Link";
 
 const Image = ({ data, className }) => {

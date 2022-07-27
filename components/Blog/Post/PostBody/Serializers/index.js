@@ -1,4 +1,4 @@
-import { getFileUrlFromId } from "../../../../../api/sanity";
+import { getFileUrlFromId } from "@lib/sanity";
 import Bold from "./Bold";
 import File from "./File";
 import Heading from "./Heading";

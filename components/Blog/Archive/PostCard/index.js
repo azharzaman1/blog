@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { urlForImage } from "@lib/sanity";
-import { formatDate, limitString } from "../../../../utils";
+import { limitString } from "../../../../utils";
 import Heading from "../../../Generic/Heading";
 import Text from "../../../Generic/Text";
 import PostTimeWidget from "../../Generic/Widgets/PostTime";
