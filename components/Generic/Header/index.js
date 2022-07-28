@@ -3,6 +3,7 @@ import Button from "../Button";
 import { FaGithub, FaGlobe, FaLinkedin } from "react-icons/fa";
 import Link from "next/link";
 import ThemeLink from "../Link";
+import Image from "next/image";
 
 const Header = () => {
   return (
@@ -11,8 +12,13 @@ const Header = () => {
         <div className="header-main min-h-[60px] px-4 sm:px-6 md:px-12 lg:px-16 flex items-center justify-between">
           <div className="header-main-left">
             <Link href="/">
-              <div className="header-left-logo cursor-pointer">
-                <img src="/logo.png" alt="azhar blog logo" className="w-24" />
+              <div className="header-left-logo cursor-pointer relative w-24 h-12">
+                <Image
+                  src="/logo.png"
+                  alt="azhar blog logo"
+                  layout="fill"
+                  objectFit="contain"
+                />
               </div>
             </Link>
           </div>

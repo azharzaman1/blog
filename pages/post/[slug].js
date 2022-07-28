@@ -9,6 +9,7 @@ import PostTimeWidget from "../../components/Blog/Generic/Widgets/PostTime";
 import PostBody from "../../components/Blog/Post/PostBody";
 import AuthorWidget from "../../components/Blog/Generic/Widgets/Author";
 import Text from "../../components/Generic/Text";
+import Image from "next/image";
 
 const Post = ({ post }) => {
   return (
@@ -17,11 +18,13 @@ const Post = ({ post }) => {
         <title>{post.title} | Azhar Blog</title>
       </Head>
       <main className="post-page-content flex flex-col items-center">
-        <div className="w-full post-banner max-w-[900px]">
-          <img
+        <div className="post-banner relative w-full max-w-[900px] h-96">
+          <Image
             src={urlForImage(post.mainImage).url()}
-            className="w-full h-96 object-center object-cover"
             alt={post.title}
+            layout="fill"
+            objectFit="cover"
+            priority
           />
         </div>
         <div className="post-content flex justify-center pb-16">

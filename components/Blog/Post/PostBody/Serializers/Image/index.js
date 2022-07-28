@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { urlForImage } from "@lib/sanity";
+import Image from "next/image";
 import Link from "../Link";
 
-const Image = ({ data, className }) => {
+const ImageSerializer = ({ data, className }) => {
   return (
     <div
       className={`post-body-img flex flex-col items-center mt-8 mb-8 ${className}`}
@@ -11,11 +12,15 @@ const Image = ({ data, className }) => {
       {data.caption && (
         <span className="font-medium text-lg mt-4">{data.caption}</span>
       )}
-      <img
-        src={urlForImage(data.asset)}
-        alt={data.alt || "post image"}
-        className="max-h-[450px]"
-      />
+      <div className="relative w-full h-96 max-h-[450px]">
+        <Image
+          src={urlForImage(data.asset).url()}
+          alt={data.alt || "post image"}
+          objectFit="contain"
+          layout="fill"
+        />
+      </div>
+
       {data.copyright_owner_url && (
         <div className="post-body-img-source mt-4">
           <em className="font-open-sans text-text-dim">
@@ -35,8 +40,8 @@ const Image = ({ data, className }) => {
   );
 };
 
-Image.propTypes = {
+ImageSerializer.propTypes = {
   className: PropTypes.string,
 };
 
-export default Image;
+export default ImageSerializer;

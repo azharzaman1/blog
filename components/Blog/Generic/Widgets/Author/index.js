@@ -2,6 +2,7 @@ import React from "react";
 import Link from "../../../../Generic/Link";
 import Text from "../../../../Generic/Text";
 import PropTypes from "prop-types";
+import Image from "next/image";
 
 const AuthorWidget = ({
   avatarUrl,
@@ -11,9 +12,9 @@ const AuthorWidget = ({
   className,
 }) => {
   return (
-    <div className={`author flex items-center justify-start ${className}`}>
-      <div className="author-image w-10 h-10 rounded-full">
-        <img src={avatarUrl} alt={name} />
+    <div className={`author flex items-center ${className}`}>
+      <div className="author-image rounded-full">
+        <Image src={avatarUrl} alt={name} width={40} height={40} />
       </div>
       <div className="author-info ml-2 flex flex-col items-start justify-start">
         <Link href={externalURL || "#"} blank>

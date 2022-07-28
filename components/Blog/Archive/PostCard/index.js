@@ -5,6 +5,7 @@ import { limitString } from "../../../../utils";
 import Heading from "../../../Generic/Heading";
 import Text from "../../../Generic/Text";
 import PostTimeWidget from "../../Generic/Widgets/PostTime";
+import Image from "next/image";
 
 const PostCard = ({ post }) => {
   const router = useRouter();
@@ -17,12 +18,14 @@ const PostCard = ({ post }) => {
     <div className="group">
       <div className="post-archive-card group-hover:shadow border rounded border-t-4 border-t-primary pb-4 transition-shadow duration-200 min-h-[430px]">
         <div
-          className="post-card-banner overflow-hidden"
+          className="post-card-banner relative w-full h-56"
           onClick={() => navigateToPost(post.slug.current)}
         >
-          <img
+          <Image
             src={urlForImage(post.mainImage).url()}
             alt={post.title}
+            layout="fill"
+            objectFit="cover"
             className="group-hover:scale-105 transition-transform duration-200"
           />
         </div>

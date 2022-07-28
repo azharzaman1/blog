@@ -36,6 +36,7 @@ export default {
     {
       name: "mainImage",
       title: "Main image",
+      description: "Use (384px * 900px) for best results",
       type: "image",
       options: {
         hotspot: true,
