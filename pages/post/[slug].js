@@ -1,6 +1,11 @@
 import React from "react";
 import Head from "next/head";
-import { postBySlugQuery, postPathsQuery } from "@lib/sanity/queries";
+import Image from "next/image";
+import {
+  getAllPostComments,
+  getPostBySlugQuery,
+  getPostPathsQuery,
+} from "@lib/sanity/queries";
 import client, { getClient, urlForImage } from "@lib/sanity";
 import BlogLayout from "../../components/Blog/Layout";
 import Container from "../../components/Generic/Layout/Container";
@@ -8,14 +13,14 @@ import Heading from "../../components/Generic/Heading";
 import PostTimeWidget from "../../components/Blog/Generic/Widgets/PostTime";
 import PostBody from "../../components/Blog/Post/PostBody";
 import AuthorWidget from "../../components/Blog/Generic/Widgets/Author";
-import Image from "next/image";
 import PostComments from "components/Blog/Post/Comments";
 
 const Post = ({ post }) => {
+  console.log(post);
   return (
     <div className="page post-page">
       <Head>
-        <title>{post.title} | Azhar Blog</title>
+        <title>Azhar Blog</title>
       </Head>
       <main className="post-page-content flex flex-col items-center">
         <div className="post-banner relative w-full max-w-[900px] h-56 sm:h-72 md:h-96">
@@ -62,7 +67,7 @@ const Post = ({ post }) => {
               </div>
             </div>
             <PostBody content={post.body} />
-            <PostComments />
+            <PostComments _id={post._id} comments={post.comments} />
           </Container>
         </div>
       </main>
@@ -74,8 +79,13 @@ Post.getLayout = (page) => <BlogLayout>{page}</BlogLayout>;
 
 export const getStaticProps = async ({ params, preview = false }) => {
   // fetch post
-  const post = await getClient(preview).fetch(postBySlugQuery, {
+  const post = await getClient(preview).fetch(getPostBySlugQuery, {
     slug: params.slug,
+  });
+
+  // fetch comments
+  const comments = await getClient(preview).fetch(getAllPostComments, {
+    postID: post._id,
   });
 
   // return post as prop
@@ -88,7 +98,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
 
   return {
     props: {
-      post,
+      post: { ...post, comments },
       preview,
     },
     // on-demand Incremental Static Regeneration(ISR)
@@ -97,7 +107,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
 
 export const getStaticPaths = async () => {
   // fetch urls of all the posts needed to be prefetched
-  const slugs = await client.fetch(postPathsQuery);
+  const slugs = await client.fetch(getPostPathsQuery);
 
   //  format paths
   const paths = slugs.map((slug) => ({ params: { slug } }));

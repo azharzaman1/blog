@@ -13,14 +13,18 @@ let monthNames = [
   "Dec",
 ];
 
-export const formatDate = (date, format) => {
+export const formatDate = (date, format = "Mon DD, YYYY") => {
   const d = new Date(date);
   let formatted = "";
 
-  if (format == 1) {
+  if (!format || format === "Mon DD, YYYY") {
     formatted = `${
       monthNames[d.getUTCMonth()]
     } ${d.getDate()}, ${d.getFullYear()}`;
+  }
+
+  if (format === "YYYY/MM/DD") {
+    formatted = `${d.getFullYear()}/${d.getUTCMonth() + 1}/${d.getDate()}`;
   }
 
   return formatted;

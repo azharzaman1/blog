@@ -20,7 +20,7 @@ export default {
     {
       name: "excerpt",
       title: "Excerpt",
-      type: "string",
+      type: "text",
       placeholder: "100 - 140 characters",
       options: {
         minLength: 80,

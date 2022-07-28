@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import Message from "components/Generic/Message";
 import AddNewComment from "./AddNewComment";
 import CommentsArchive from "./CommentsArchive";
 
-const Comments = () => {
-  const comments = [];
-
+const Comments = ({ comments, _id }) => {
+  const [commentPosted, setCommentPosted] = useState(false);
   return (
-    <div className="post-comments">
-      <AddNewComment />
-      <CommentsArchive
-        comments={[].length > 0 ? comments : null}
-        className="mt-16"
-      />
+    <div className="post-comments w-full md:w-[550px]">
+      <CommentsArchive comments={comments} className="mt-8" />
+      {!commentPosted && (
+        <AddNewComment
+          _id={_id}
+          setCommentPosted={setCommentPosted}
+          className="mt-16"
+        />
+      )}
+      {commentPosted && (
+        <Message
+          type="success"
+          title="Comment Posted"
+          description="You commend has been sent to the Author and will be added when approved."
+          className="mt-16"
+        />
+      )}
     </div>
   );
 };

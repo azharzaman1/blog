@@ -12,6 +12,7 @@ const Button = ({
   children,
   className,
   isSubmitButton,
+  loading, // TODO
   disabled = false,
   ...rest
 }) => {
@@ -53,6 +54,7 @@ const Button = ({
         {startIcon && (
           <span className="primary-button-start-icon mr-2">{startIcon}</span>
         )}
+
         <span>{children}</span>
         {endIcon && <span className="button-end-icon ml-2">{endIcon}</span>}
       </button>
@@ -109,6 +111,7 @@ Button.propTypes = {
   endIcon: PropTypes.node,
   isSubmitButton: PropTypes.bool,
   disabled: PropTypes.bool,
+  loading: PropTypes.bool,
 };
 
 export default Button;

@@ -11,7 +11,7 @@ const PostTimeWidget = ({ date, readTime, className }) => {
         <FaClock className="!text-text-dim !w-5" />
       </span>
       <Text type="info" className="ml-1.5">
-        {formatDate(date, 1)}
+        {formatDate(date, "Mon DD, YYYY")}
       </Text>
       {readTime && (
         <>

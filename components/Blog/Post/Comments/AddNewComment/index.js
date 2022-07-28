@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "components/Generic/Button";
 import ErrorMessage from "components/Generic/Error";
 import Heading from "components/Generic/Heading";
 import { useForm } from "react-hook-form";
+import axios from "@lib/axios";
 
 const styles = {
   input:
@@ -14,7 +15,8 @@ const styles = {
   error: "",
 };
 
-const AddNewComment = () => {
+const AddNewComment = ({ _id, className, setCommentPosted }) => {
+  const [posting, setPosting] = useState(false);
   const {
     register,
     handleSubmit,
@@ -22,11 +24,29 @@ const AddNewComment = () => {
   } = useForm();
 
   const submitComment = (data) => {
-    console.log("Comment", data);
+    setPosting(true);
+    axios
+      .post("/comments", {
+        ...data,
+        _id,
+        approved: false,
+        likes: 0,
+        clap_count: 0,
+        replies: [],
+      })
+      .then((res) => {
+        console.log("Comment post response", res);
+        setPosting(false);
+        setCommentPosted(true);
+      })
+      .catch((error) => {
+        console.log("Comment post error", error);
+        setPosting(false);
+      });
   };
 
   return (
-    <div className="add-comment flex flex-col">
+    <div className={`add-comment flex flex-col ${className}`}>
       <Heading>Leave a comment!</Heading>
 
       <form onSubmit={handleSubmit(submitComment)} className={styles.form}>
@@ -107,13 +127,14 @@ const AddNewComment = () => {
           <Button
             color="bnw"
             variant="outlined"
+            className="w-40" // to prevent collapse when loading
             onSubmit={handleSubmit(submitComment)}
             disabled={
               errors.commentName || errors.commentEmail || errors.commentBody
             }
             isSubmitButton
           >
-            Post comment
+            {posting ? "Posting..." : "Post comment"}
           </Button>
         </div>
       </form>
