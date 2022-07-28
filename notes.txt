@@ -1,2 +1,4 @@
 http://localhost:3000/api/revalidate?secret=89d4e914ddd07fd2623a3c1a4b65f073&route=/post/post_slug
 https://blog.azharzaman.com/api/revalidate?secret=89d4e914ddd07fd2623a3c1a4b65f073&route=/post/post_slug
+
+"prebuild": "echo 'Building Sanity to public/studio' && cd studio && npx @sanity/cli build ../public/studio -y && echo 'Done'",
