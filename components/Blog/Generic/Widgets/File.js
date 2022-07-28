@@ -1,7 +1,6 @@
 import { FaDownload } from "react-icons/fa";
 
 export default function File({ name, url }) {
-  console.log(url);
   return (
     <div className="block file embeded-file my-8">
       <a
