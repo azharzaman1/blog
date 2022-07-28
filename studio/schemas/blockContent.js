@@ -102,34 +102,57 @@ export default {
       title: "Image",
       fields: [
         {
-          title: "Alt",
+          title: "Alternative text(Alt)",
           name: "alt",
           type: "string",
+          description: "Important for SEO and accessiblity.",
+          options: {
+            isHighlighted: true,
+          },
         },
         {
           title: "Caption",
           name: "caption",
           type: "string",
+          options: {
+            isHighlighted: true,
+          },
         },
         {
           title: "Copyright Owner Name",
           name: "copyright_owner",
           type: "string",
+          description: "e.g. Elon Musk",
+          options: {
+            isHighlighted: true,
+          },
         },
         {
           title: "Copyright Owner URL",
           name: "copyright_owner_url",
           type: "url",
+          description: "e.g. www.elonmusk.com",
+          options: {
+            isHighlighted: true,
+          },
         },
         {
           title: "Copyright Source",
           name: "copyright_source",
+          description: "e.g. article OR website OR book, etc.",
           type: "string",
+          options: {
+            isHighlighted: true,
+          },
         },
         {
           title: "Copyright Source URL",
           name: "copyright_source_url",
+          description: "e.g. url of article OR website OR book, etc.",
           type: "url",
+          options: {
+            isHighlighted: true,
+          },
         },
       ],
       options: {

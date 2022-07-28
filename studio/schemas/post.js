@@ -38,6 +38,17 @@ export default {
       title: "Main image",
       description: "Use (384px * 900px) for best results",
       type: "image",
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Alternative text(Alt)",
+          description: "Important for SEO and accessiblity.",
+          options: {
+            isHighlighted: true,
+          },
+        },
+      ],
       options: {
         hotspot: true,
       },

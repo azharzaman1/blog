@@ -18,7 +18,7 @@ const Post = ({ post }) => {
         <title>{post.title} | Azhar Blog</title>
       </Head>
       <main className="post-page-content flex flex-col items-center">
-        <div className="post-banner relative w-full max-w-[900px] h-96">
+        <div className="post-banner relative w-full max-w-[900px] h-56 sm:h-72 md:h-96">
           <Image
             src={urlForImage(post.mainImage).url()}
             alt={post.title}
