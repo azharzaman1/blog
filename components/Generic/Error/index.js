@@ -1,5 +1,6 @@
 import React from "react";
 import { FaExclamationCircle } from "react-icons/fa";
+import PropTypes from "prop-types";
 
 const ErrorMessage = ({ children, className }) => {
   return (
@@ -10,6 +11,11 @@ const ErrorMessage = ({ children, className }) => {
       <span className="ml-2 text-sm text-red-500">{children}</span>
     </div>
   );
+};
+
+ErrorMessage.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
 };
 
 export default ErrorMessage;
