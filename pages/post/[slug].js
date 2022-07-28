@@ -8,8 +8,8 @@ import Heading from "../../components/Generic/Heading";
 import PostTimeWidget from "../../components/Blog/Generic/Widgets/PostTime";
 import PostBody from "../../components/Blog/Post/PostBody";
 import AuthorWidget from "../../components/Blog/Generic/Widgets/Author";
-import Text from "../../components/Generic/Text";
 import Image from "next/image";
+import PostComments from "components/Blog/Post/Comments";
 
 const Post = ({ post }) => {
   return (
@@ -62,12 +62,7 @@ const Post = ({ post }) => {
               </div>
             </div>
             <PostBody content={post.body} />
-            <div className="post-comments">
-              <Heading>Comments</Heading>
-              <Text className="mt-2">
-                Comments section coming soon, I am working on it
-              </Text>
-            </div>
+            <PostComments />
           </Container>
         </div>
       </main>

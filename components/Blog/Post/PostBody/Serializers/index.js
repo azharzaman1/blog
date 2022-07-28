@@ -39,5 +39,5 @@ export const serializers = {
     <File name={file.name} url={getFileUrlFromId(file.asset._ref)} />
   ),
 
-  image: (props) => <Image data={props} />,
+  image: (props) => <Image data={props} alt="" />,
 };

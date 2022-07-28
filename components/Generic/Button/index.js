@@ -12,6 +12,7 @@ const Button = ({
   children,
   className,
   isSubmitButton,
+  disabled = false,
   ...rest
 }) => {
   const sizes = {
@@ -23,7 +24,7 @@ const Button = ({
 
   const colorsOutlined = {
     primary: "text-primary hover:bg-primary border-primary",
-    bnw: "text-text hover:bg-text border-text", // black and white
+    bnw: "text-text hover:bg-text border-text focus:bg-text disabled:opacity-50", // black and white
   };
 
   const colorsContained = {
@@ -33,7 +34,7 @@ const Button = ({
 
   const variants = {
     contained: `text-white ${colorsContained[color]}`,
-    outlined: `bg-transparent hover:text-white ${colorsOutlined[color]}`,
+    outlined: `bg-transparent hover:text-white focus:text-white ${colorsOutlined[color]}`,
   };
 
   if (type === "primary") {
@@ -45,6 +46,8 @@ const Button = ({
           raised && "shadow"
         } ${className}`}
         type={isSubmitButton && "submit"}
+        disabled={disabled}
+        aria-disabled={disabled && true}
         {...rest}
       >
         {startIcon && (
@@ -61,6 +64,7 @@ const Button = ({
       <button
         className={`flex items-center justify-center text-textBright hover:text-primary-light transition-colors duration-150 ${className}`}
         type={isSubmitButton && "submit"}
+        disabled={disabled}
         {...rest}
       >
         {startIcon && (
@@ -83,6 +87,7 @@ const Button = ({
     return (
       <button
         className={`rounded-full p-2 border-2 flex items-center justify-center hover:opacity-80 transition-all duration-150 ${colorsIconButton[color]} ${className}`}
+        disabled={disabled}
         {...rest}
       >
         <span>{children}</span>
@@ -103,6 +108,7 @@ Button.propTypes = {
   startIcon: PropTypes.node,
   endIcon: PropTypes.node,
   isSubmitButton: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default Button;
