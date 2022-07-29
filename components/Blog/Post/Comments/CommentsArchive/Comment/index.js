@@ -6,27 +6,47 @@ import { FaHands } from "react-icons/fa";
 import axios from "@lib/axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import useDebounce from "hooks/useDebounce";
+import { useRouter } from "next/router";
 
 const Comment = ({ comment }) => {
-  console.log({ comment });
-  const [claping, setClaping] = useState(false);
-  const [claps, setClaps] = useState(comment.clap_count);
+  const [claps, setClaps] = useState(comment.clap_count); // claps to render on screen, initially from db, then updated
   const [isAdmin, setIsAdmin] = useState(false);
+  const [claping, setClaping] = useState(false); // saving claps to db(sanity)
+  const [clapsToUpdate, setClapsToUpdate] = useState(0);
+  const debouncedClapCountToUpdate = useDebounce(clapsToUpdate, 2000);
 
-  const clapForCommentHandler = () => {
-    setClaping(true);
-    axios
-      .get(`/comments/clap/${comment._id}`)
-      .then((res) => {
-        console.log("Comment clap response", res);
-        setClaps(res.data.clap_count);
-        setClaping(false);
-      })
-      .catch((error) => {
-        console.log("Comment clap error", error);
-        setClaping(false);
-      });
-  };
+  const router = useRouter();
+  const { slug } = router.query;
+
+  useEffect(() => {
+    const clapForCommentHandler = () => {
+      console.log("Requesting claps updated in DB");
+      setClaping(true);
+      axios
+        .post(`/comments/clap/${comment._id}`, {
+          claps: debouncedClapCountToUpdate,
+          postSlug: slug,
+        })
+        .then(async (res) => {
+          console.log("Claps update response recieved", res);
+          console.log("Finishing...");
+          setClaps(res.data.clap_count);
+          console.log("Current claps", res.data.clap_count);
+          setClapsToUpdate(0);
+          setClaping(false);
+          console.log("Finished");
+        })
+        .catch((error) => {
+          console.log("Comment clap error", error);
+          setClaping(false);
+        });
+    };
+
+    if (debouncedClapCountToUpdate > 0) {
+      clapForCommentHandler();
+    }
+  }, [debouncedClapCountToUpdate, comment._id, slug]);
 
   useEffect(() => {
     if (
@@ -52,9 +72,9 @@ const Comment = ({ comment }) => {
         <button
           className="flex items-center"
           disabled={claping}
-          onClick={clapForCommentHandler}
+          onClick={() => setClapsToUpdate((prev) => prev + 1)}
         >
-          <span>{claps}</span>
+          <span>{claps + clapsToUpdate}</span>
           <FaHands className="ml-1" />
         </button>
 
