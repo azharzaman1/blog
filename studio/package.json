@@ -8,7 +8,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "build": "npx @sanity/cli build ../public/studio -y"
+    "prebuild": "echo 'Installing deps' && npm install && npm install @sanity/cli",
+    "build": "sanity build ../public/studio -y"
   },
   "keywords": [
     "sanity"
