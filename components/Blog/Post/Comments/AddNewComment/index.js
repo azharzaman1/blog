@@ -4,6 +4,7 @@ import ErrorMessage from "components/Generic/Error";
 import Heading from "components/Generic/Heading";
 import { useForm } from "react-hook-form";
 import axios from "@lib/axios";
+import { useRouter } from "next/router";
 
 const styles = {
   input:
@@ -15,13 +16,16 @@ const styles = {
   error: "",
 };
 
-const AddNewComment = ({ _id, className, setCommentPosted }) => {
+const AddNewComment = ({ _id, className, omitHeading, setCommentPosted }) => {
   const [posting, setPosting] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const router = useRouter();
+  const { slug } = router.query;
 
   const submitComment = (data) => {
     setPosting(true);
@@ -33,6 +37,7 @@ const AddNewComment = ({ _id, className, setCommentPosted }) => {
         likes: 0,
         clap_count: 0,
         replies: [],
+        slugSlug: slug,
       })
       .then((res) => {
         console.log("Comment post response", res);
@@ -47,7 +52,7 @@ const AddNewComment = ({ _id, className, setCommentPosted }) => {
 
   return (
     <div className={`add-comment flex flex-col ${className}`}>
-      <Heading>Leave a comment!</Heading>
+      {!omitHeading && <Heading>Leave a comment!</Heading>}
 
       <form onSubmit={handleSubmit(submitComment)} className={styles.form}>
         {/* Post Name Input */}

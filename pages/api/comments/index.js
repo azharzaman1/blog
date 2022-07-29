@@ -1,38 +1,27 @@
 import { sanityClient2 } from "@lib/sanity";
 
 export default async function handler(req, res) {
-  // Check for secret to confirm this is a valid request
-  const {
-    _id,
-    commentName,
-    commentBody,
-    commentEmail,
-    approved,
-    likes,
-    replies,
-    clap_count,
-  } = req.body;
-
   const doc = {
     _type: "comment",
     post: {
       _type: "reference",
-      _ref: _id,
+      _ref: req.body._id,
     },
-    name: commentName,
-    body: commentBody,
-    email: commentEmail,
-    approved: approved,
-    likes,
-    replies,
-    clap_count,
+    name: req.body.commentName,
+    body: req.body.commentBody,
+    email: req.body.commentEmail,
+    approved: req.body.approved,
+    likes: req.body.likes,
+    replies: req.body.replies,
+    clap_count: req.body.clap_count,
   };
 
   sanityClient2
     .create(doc)
-    .then((data) => {
+    .then(async (data) => {
       console.log(`Comment was created, document ID is ${data._id}`);
-      res.status(201).json({ data, message: "Posted", postRef: _id });
+      req.body.approved && (await res.revalidate(`/post/${req.body.postSlug}`)); // revalidate relevent post
+      res.status(201).json({ data, message: "Posted", postRef: req.body._id });
     })
     .catch((err) => {
       return res.status(500).json({ message: err.message });

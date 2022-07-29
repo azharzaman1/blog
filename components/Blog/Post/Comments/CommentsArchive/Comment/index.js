@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import useDebounce from "hooks/useDebounce";
 import { useRouter } from "next/router";
+import AddNewComment from "../../AddNewComment";
 
 const Comment = ({ comment }) => {
   const [claps, setClaps] = useState(comment.clap_count); // claps to render on screen, initially from db, then updated
@@ -15,6 +16,8 @@ const Comment = ({ comment }) => {
   const [claping, setClaping] = useState(false); // saving claps to db(sanity)
   const [clapsToUpdate, setClapsToUpdate] = useState(0);
   const debouncedClapCountToUpdate = useDebounce(clapsToUpdate, 2000);
+
+  const [addingReply, setAddingReply] = useState(false);
 
   const router = useRouter();
   const { slug } = router.query;
@@ -30,12 +33,9 @@ const Comment = ({ comment }) => {
         })
         .then(async (res) => {
           console.log("Claps update response recieved", res);
-          console.log("Finishing...");
           setClaps(res.data.clap_count);
-          console.log("Current claps", res.data.clap_count);
           setClapsToUpdate(0);
           setClaping(false);
-          console.log("Finished");
         })
         .catch((error) => {
           console.log("Comment clap error", error);
@@ -78,10 +78,28 @@ const Comment = ({ comment }) => {
           <FaHands className="ml-1" />
         </button>
 
-        <button className="ml-3 text-sm hover:underline cursor-pointer">
-          Reply {isAdmin && "as admin"}
+        <button
+          className="ml-3 text-sm hover:underline cursor-pointer"
+          // onClick={() => setAddingReply((prev) => !prev)}
+        >
+          Reply feature comming soon
+          {/* Repl{addingReply ? "ing" : "y"} {isAdmin && "as admin"} */}
         </button>
       </div>
+
+      {/* <div className="comment-replies mt-2">
+        {addingReply && (
+          <div className="ml-2 border-l-4">
+            <div className="add-reply-to-comment ml-2">
+              <AddNewComment
+                _id={comment._id}
+                setCommentPosted={() => {}}
+                omitHeading
+              />
+            </div>
+          </div>
+        )}
+      </div> */}
     </div>
   );
 };

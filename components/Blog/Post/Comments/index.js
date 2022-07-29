@@ -7,12 +7,11 @@ const Comments = ({ comments, _id }) => {
   const [commentPosted, setCommentPosted] = useState(false);
   return (
     <div className="post-comments w-full md:w-[550px]">
-      <CommentsArchive comments={comments} className="mt-8" />
       {!commentPosted && (
         <AddNewComment
           _id={_id}
           setCommentPosted={setCommentPosted}
-          className="mt-16"
+          className="mt-8"
         />
       )}
       {commentPosted && (
@@ -20,9 +19,11 @@ const Comments = ({ comments, _id }) => {
           type="success"
           title="Comment Posted"
           description="You commend has been sent to the Author and will be added when approved."
-          className="mt-16"
+          className="mt-8"
         />
       )}
+
+      <CommentsArchive comments={comments} className="mt-16" />
     </div>
   );
 };
