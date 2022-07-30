@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     .then(async (data) => {
       console.log(`Comment was created, with _id: ${data._id}`);
       console.log("Revalidating Path >", `/post/${req.body.postSlug}`);
-      await res.revalidate(`/post/${req.body.postSlug}`); // revalidate relevent post
+      req.body.approved && (await res.revalidate(`/post/${req.body.postSlug}`)); // revalidate relevent post
       console.log("Revalidated Path >", `/post/${req.body.postSlug}`);
       res.status(201).json({
         data,
