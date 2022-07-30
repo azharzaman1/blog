@@ -18,7 +18,7 @@ const Comments = ({ comments, _id }) => {
         <Message
           type="success"
           title="Comment Posted"
-          description="You commend has been sent to the Author and will be added when approved."
+          description="You comment has been posted. Will be added to website after approvel. This is to prevent spasming"
           className="mt-8"
         />
       )}

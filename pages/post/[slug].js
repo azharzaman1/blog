@@ -23,7 +23,7 @@ import { TbRefreshDot } from "react-icons/tb";
 const Post = ({ post }) => {
   const isAdmin = useUserStatus(false);
   const [revalidatingPost, setRevalidatingPost] = useState(false);
-  const [revalidatingPosts, setRevalidatingPosts] = useState(false);
+  // const [revalidatingPosts, setRevalidatingPosts] = useState(false);
 
   const router = useRouter();
   const { slug } = router.query;
@@ -46,23 +46,24 @@ const Post = ({ post }) => {
       });
   };
 
-  const allPostsRevalidationHandler = () => {
-    setRevalidatingPosts(true);
-    axios
-      .get(
-        `/revalidate/all?secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET_TOKEN}`
-      )
-      .then((res) => {
-        console.log("Posts revalidate response", res);
-      })
-      .catch((err) => {
-        console.log("Posts revalidate error:", err.message);
-      })
-      .finally(() => {
-        console.log("Posts revalidation attempt finished");
-        setRevalidatingPosts(false);
-      });
-  };
+  // No need now
+  // const allPostsRevalidationHandler = () => {
+  //   setRevalidatingPosts(true);
+  //   axios
+  //     .get(
+  //       `/revalidate/all?secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET_TOKEN}`
+  //     )
+  //     .then((res) => {
+  //       console.log("Posts revalidate response", res);
+  //     })
+  //     .catch((err) => {
+  //       console.log("Posts revalidate error:", err.message);
+  //     })
+  //     .finally(() => {
+  //       console.log("Posts revalidation attempt finished");
+  //       setRevalidatingPosts(false);
+  //     });
+  // };
 
   return (
     <div className="page post-page">
@@ -80,13 +81,13 @@ const Post = ({ post }) => {
           />
           {isAdmin && (
             <div className="post-admin-actions flex items-center absolute right-4 top-4 text-white bg-white bg-opacity-10 rounded-full py-1.5 px-2.5">
-              <button
+              {/* <button
                 title="Revalidate All Posts"
                 className="mr-2"
                 onClick={allPostsRevalidationHandler}
               >
                 <TbRefreshDot className={revalidatingPosts && "animate-spin"} />
-              </button>
+              </button> */}
               <button
                 title="Revalidate"
                 className="flex items-center"
