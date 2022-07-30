@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
+import axios from "@lib/axios";
+import { useRouter } from "next/router";
 import {
   getAllPostComments,
   getPostBySlugQuery,
@@ -14,13 +16,58 @@ import PostTimeWidget from "../../components/Blog/Generic/Widgets/PostTime";
 import PostBody from "../../components/Blog/Post/PostBody";
 import AuthorWidget from "../../components/Blog/Generic/Widgets/Author";
 import PostComments from "components/Blog/Post/Comments";
+import useUserStatus from "hooks/useUserStatus";
+import { BiRefresh } from "react-icons/bi";
+import { TbRefreshDot } from "react-icons/tb";
 
 const Post = ({ post }) => {
-  console.log(post);
+  const isAdmin = useUserStatus(false);
+  const [revalidatingPost, setRevalidatingPost] = useState(false);
+  const [revalidatingPosts, setRevalidatingPosts] = useState(false);
+
+  const router = useRouter();
+  const { slug } = router.query;
+
+  const postRevalidationHandler = () => {
+    setRevalidatingPost(true);
+    axios
+      .get(
+        `/revalidate?secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET_TOKEN}&route=/post/${slug}`
+      )
+      .then((res) => {
+        console.log("Post revalidate response", res);
+      })
+      .catch((err) => {
+        console.log("Post revalidate error:", err.message);
+      })
+      .finally(() => {
+        console.log("Post revalidation attempt finished");
+        setRevalidatingPost(false);
+      });
+  };
+
+  const allPostsRevalidationHandler = () => {
+    setRevalidatingPosts(true);
+    axios
+      .get(
+        `/revalidate/all?secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET_TOKEN}`
+      )
+      .then((res) => {
+        console.log("Posts revalidate response", res);
+      })
+      .catch((err) => {
+        console.log("Posts revalidate error:", err.message);
+      })
+      .finally(() => {
+        console.log("Posts revalidation attempt finished");
+        setRevalidatingPosts(false);
+      });
+  };
+
   return (
     <div className="page post-page">
       <Head>
-        <title>{post.title} | Azhar Blog</title>
+        <title>Blog Post Title | Azhar Blog</title>
       </Head>
       <main className="post-page-content flex flex-col items-center">
         <div className="post-banner relative w-full max-w-[900px] h-56 sm:h-72 md:h-96">
@@ -31,6 +78,24 @@ const Post = ({ post }) => {
             objectFit="cover"
             priority
           />
+          {isAdmin && (
+            <div className="post-admin-actions flex items-center absolute right-4 top-4 text-white bg-white bg-opacity-10 rounded-full py-1.5 px-2.5">
+              <button
+                title="Revalidate All Posts"
+                className="mr-2"
+                onClick={allPostsRevalidationHandler}
+              >
+                <TbRefreshDot className={revalidatingPosts && "animate-spin"} />
+              </button>
+              <button
+                title="Revalidate"
+                className="flex items-center"
+                onClick={postRevalidationHandler}
+              >
+                <BiRefresh className={revalidatingPost && "animate-spin"} />
+              </button>
+            </div>
+          )}
         </div>
         <div className="post-content flex justify-center pb-16">
           <Container maxWidth="md">

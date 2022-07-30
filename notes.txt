@@ -3,3 +3,5 @@ https://blog.azharzaman.com/api/revalidate?secret=89d4e914ddd07fd2623a3c1a4b65f0
 Improvements: 
    create virtual user of vistor in localStorage
    add reply feature
+
+Additions: Blog post sidebar

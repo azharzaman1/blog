@@ -50,8 +50,8 @@ const Comment = ({ comment }) => {
 
   useEffect(() => {
     if (
-      localStorage.getItem("azhar-blog-admin-secret") ===
-      process.env.NEXT_PUBLIC_ADMIN_SECRET
+      localStorage.getItem("azhar_blog_visitor_uid") ===
+      process.env.NEXT_PUBLIC_ADMIN_SECRET_UID
     ) {
       setIsAdmin(true);
     }
