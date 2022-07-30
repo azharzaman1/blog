@@ -4,17 +4,17 @@ import AddNewComment from "./AddNewComment";
 import CommentsArchive from "./CommentsArchive";
 
 const Comments = ({ comments, _id }) => {
-  const [commentPosted, setCommentPosted] = useState(false);
+  const [showApprovalMessage, setShowApprovalMessage] = useState(false);
   return (
     <div className="post-comments w-full md:w-[550px]">
-      {!commentPosted && (
+      {!showApprovalMessage && (
         <AddNewComment
           _id={_id}
-          setCommentPosted={setCommentPosted}
+          setShowApprovalMessage={setShowApprovalMessage}
           className="mt-8"
         />
       )}
-      {commentPosted && (
+      {showApprovalMessage && (
         <Message
           type="success"
           title="Comment Posted"

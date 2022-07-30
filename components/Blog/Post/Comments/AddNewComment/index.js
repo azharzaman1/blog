@@ -5,6 +5,8 @@ import Heading from "components/Generic/Heading";
 import { useForm } from "react-hook-form";
 import axios from "@lib/axios";
 import { useRouter } from "next/router";
+import { v4 } from "uuid";
+import { useEffect } from "react";
 
 const styles = {
   input:
@@ -16,7 +18,13 @@ const styles = {
   error: "",
 };
 
-const AddNewComment = ({ _id, className, omitHeading, setCommentPosted }) => {
+const AddNewComment = ({
+  _id,
+  className,
+  omitHeading,
+  setShowApprovalMessage,
+}) => {
+  const [uid, setUid] = useState("");
   const [posting, setPosting] = useState(false);
   const {
     register,
@@ -33,22 +41,33 @@ const AddNewComment = ({ _id, className, omitHeading, setCommentPosted }) => {
       .post("/comments", {
         ...data,
         _id,
-        approved: false,
+        approved: true,
         likes: 0,
         clap_count: 0,
         replies: [],
-        slugSlug: slug,
+        postSlug: slug,
+        uid,
       })
       .then((res) => {
         console.log("Comment post response", res);
         setPosting(false);
-        setCommentPosted(true);
+        !res.data.approved && setShowApprovalMessage(true);
       })
       .catch((error) => {
         console.log("Comment post error", error);
         setPosting(false);
       });
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // client
+      const uid = localStorage.getItem("azhar_blog_visitor_uid");
+      if (uid) {
+        setUid(uid);
+      }
+    }
+  }, []);
 
   return (
     <div className={`add-comment flex flex-col ${className}`}>

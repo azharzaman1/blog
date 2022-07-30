@@ -6,15 +6,16 @@ export default async function handler(req, res) {
   if (req.query.secret !== process.env.NEXT_PUBLIC_REVALIDATE_SECRET_TOKEN) {
     return res.status(401).json({ message: "Invalid token" });
   }
-
+  let revalidatedRoutes = [];
   // fetch post slugs to revalidate
   sanityClient2
     .fetch(getPostPathsQuery)
-    .then((slugs) => {
-      slugs.forEach(async (slug, index) => {
+    .then(async (slugs) => {
+      await slugs.forEach(async (slug) => {
         // revalidate slug
         console.log("Revalidating Slug >", `/post/${slug}`);
         await res.revalidate(`/post/${slug}`);
+        revalidatedRoutes.push(`/post/${slug}`);
       });
     })
     .catch((err) => {
@@ -22,6 +23,7 @@ export default async function handler(req, res) {
     })
     .finally(() => {
       return res.json({
+        revalidatedRoutes,
         revalidated: true,
       });
     });

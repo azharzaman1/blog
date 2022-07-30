@@ -3,7 +3,6 @@ import PostCard from "../../Blog/Archive/PostCard";
 import Container from "../../Generic/Layout/Container";
 
 const Blog = ({ posts }) => {
-  console.log(posts);
   return (
     <div className="blog-content py-16 flex justify-center">
       <Container maxWidth="xl">

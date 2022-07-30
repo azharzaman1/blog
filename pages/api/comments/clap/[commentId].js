@@ -8,9 +8,9 @@ export default async function handler(req, res) {
     .commit() // Perform the patch and return a promise
     .then(async (updated) => {
       console.log("Claped");
-
+      console.log("Revalidating Path >", `/post/${req.body.postSlug}`);
       await res.revalidate(`/post/${req.body.postSlug}`);
-
+      console.log("Revalidated Path >", `/post/${req.body.postSlug}`);
       res.status(201).json({
         message: "Claped",
         _id: updated._id,

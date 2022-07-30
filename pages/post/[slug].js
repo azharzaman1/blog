@@ -150,7 +150,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
 
   // fetch comments
   const comments = await getClient(preview).fetch(getAllPostComments, {
-    postID: post._id,
+    postID: post?._id,
   });
 
   // return post as prop
