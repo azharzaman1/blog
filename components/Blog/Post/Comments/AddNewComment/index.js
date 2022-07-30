@@ -41,7 +41,7 @@ const AddNewComment = ({
       .post("/comments", {
         ...data,
         _id,
-        approved: true,
+        approved: false,
         likes: 0,
         clap_count: 0,
         replies: [],
