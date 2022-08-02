@@ -10,9 +10,9 @@ const ImageSerializer = ({ data, className }) => {
       className={`post-body-img flex flex-col items-center mt-8 mb-8 ${className}`}
     >
       {data.caption && (
-        <span className="font-medium text-lg mt-4">{data.caption}</span>
+        <span className="font-medium text-lg mt-4 mb-2">{data.caption}</span>
       )}
-      <div className="relative w-full h-96 max-h-[450px]">
+      <div className="relative w-full h-[500px]">
         <Image
           src={urlForImage(data.asset).url()}
           alt={data.alt || "post image"}

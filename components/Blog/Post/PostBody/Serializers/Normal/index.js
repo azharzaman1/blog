@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Normal = ({ children, className }) => {
   return (
     <p
-      className={`mt-2 mb-2 text-lg text-text tracking-normal leading-relaxed ${className}`}
+      className={`mt-4 mb-8 text-lg text-text tracking-normal leading-relaxed ${className}`}
     >
       {children}
     </p>
