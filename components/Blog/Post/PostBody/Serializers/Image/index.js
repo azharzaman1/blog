@@ -12,12 +12,12 @@ const ImageSerializer = ({ data, className }) => {
       {data.caption && (
         <span className="font-medium text-lg mt-4 mb-2">{data.caption}</span>
       )}
-      <div className="relative w-full h-[500px]">
+      <div className="relative w-full h-[50vh]">
         <Image
           src={urlForImage(data.asset).url()}
-          alt={data.alt || "post image"}
-          objectFit="contain"
+          alt={data.alt}
           layout="fill"
+          objectFit="contain"
         />
       </div>
 
@@ -42,6 +42,7 @@ const ImageSerializer = ({ data, className }) => {
 
 ImageSerializer.propTypes = {
   className: PropTypes.string,
+  data: PropTypes.object,
 };
 
 export default ImageSerializer;

@@ -7,7 +7,7 @@ const Link = ({ href, blank = false, underline, children, className }) => {
       href={href}
       target={blank && "_blank"}
       rel={blank && "noopener noreferrer"}
-      className={`text-base font-medium text-text hover:text-primary hover:underline underline-offset-2 tracking-normal leading-normal transition-colors duration-150 ${
+      className={`text-base font-normal text-text hover:text-primary hover:underline underline-offset-2 tracking-normal leading-normal transition-colors duration-150 ${
         underline && "underline"
       } ${className}`}
     >
