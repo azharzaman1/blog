@@ -51,7 +51,7 @@ const Post = ({ post }) => {
         <title>Blog Post Title | Azhar Blog</title>
       </Head>
       <main className="post-page-content flex flex-col items-center">
-        <div className="post-banner relative w-full max-w-[900px] h-56 sm:h-72 md:h-96">
+        <div className="post-banner relative w-full max-w-[800px] h-56 sm:h-72 md:h-96">
           <Image
             src={urlForImage(post.mainImage).url()}
             alt={post.title}
@@ -77,14 +77,14 @@ const Post = ({ post }) => {
               <div className="post-info mt-6 pl-2">
                 <Heading>{post.title}</Heading>
                 <div className="flex flex-col md:flex-row justify-start md:items-center mt-2">
-                  <div className="blog-post-timings">
+                  <div className="blog-post-timings md:flex-[0.33]">
                     <PostTimeWidget
                       date={post.publishedAt}
                       readTime={post.readTime}
                     />
                   </div>
-                  <div className="mt-2 md:ml-4 md:mt-0 blog-post-tags flex flex-wrap text-xs sm:text-sm items-center">
-                    {post.postTags.map((tag) => (
+                  <div className="mt-2 md:ml-4 md:mt-0 blog-post-tags flex flex-wrap text-xs sm:text-sm items-center md:flex-[0.67]">
+                    {post.postTags.slice(0, 4).map((tag) => (
                       <span
                         key={tag.value}
                         className="text-sm mx-1 sm:mx-1 md:mx-1.5 text-text-dim"

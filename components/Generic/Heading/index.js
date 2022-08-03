@@ -13,7 +13,7 @@ const Heading = ({
   if (type === "primary") {
     return (
       <Tag
-        className={`heading heading-primary font-semibold text-2xl md:text-3xl lg:text-4xl md:tracking-tight ${className}`}
+        className={`heading heading-primary font-semibold text-2xl md:text-3xl lg:text-4xl leading-relaxed md:tracking-tight ${className}`}
         {...rest}
       >
         {children}
