@@ -9,12 +9,15 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     if (typeof window !== "undefined") {
       // client
-      if (localStorage.getItem("azhar_blog_visitor_uid")) {
+      if (localStorage.getItem("azhar_blog_visitor_user_obj")) {
         // already visited before
         return;
       } else {
         // new user
-        localStorage.setItem("azhar_blog_visitor_uid", v4());
+        localStorage.setItem(
+          "azhar_blog_visitor_user_obj",
+          JSON.stringify({ uid: v4() })
+        );
       }
     }
   }, []);

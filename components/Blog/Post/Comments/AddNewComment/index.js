@@ -62,7 +62,9 @@ const AddNewComment = ({
   useEffect(() => {
     if (typeof window !== "undefined") {
       // client
-      const uid = localStorage.getItem("azhar_blog_visitor_uid");
+      const uid = JSON.parse(
+        localStorage.getItem("azhar_blog_visitor_user_obj")
+      ).uid;
       if (uid) {
         setUid(uid);
       }
