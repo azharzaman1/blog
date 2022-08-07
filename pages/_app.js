@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useEffect } from "react";
 import { v4 } from "uuid";
+import { Provider as RadixTooltipProvider } from "@radix-ui/react-tooltip";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
@@ -34,7 +35,9 @@ function MyApp({ Component, pageProps }) {
           href="https://upload.wikimedia.org/wikipedia/commons/3/3e/Eo_circle_pink_letter-a.svg"
         />
       </Head>
-      {getLayout(<Component {...pageProps} />)}
+      <RadixTooltipProvider>
+        {getLayout(<Component {...pageProps} />)}
+      </RadixTooltipProvider>
     </>
   );
 }

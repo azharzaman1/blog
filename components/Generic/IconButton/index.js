@@ -17,7 +17,7 @@ const IconButton = ({
   const variants = {
     contained: "border-2 bg-white",
     outlined: "border-2 border-gray-600",
-    minimal: "shadow",
+    minimal: "shadow hover:shadow-lg",
   };
 
   return (

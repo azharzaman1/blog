@@ -8,6 +8,7 @@ import {
 import { MdAlternateEmail } from "react-icons/md";
 import { FaFacebook } from "react-icons/fa";
 import useCopyToClipboard from "hooks/useCopyToClipboard";
+import Tooltip from "components/Generic/Tooltip";
 
 const PostShareWidget = ({ slug, horizontal, variant, className }) => {
   const [state, copyToClipboard] = useCopyToClipboard();
@@ -30,49 +31,77 @@ const PostShareWidget = ({ slug, horizontal, variant, className }) => {
           horizontal && "flex items-center justify-start"
         }`}
       >
-        <a
-          href={shareURIs["linkedin"]}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Tooltip
+          content="Share on Linkedin"
+          placement={horizontal ? "top" : "left"}
         >
-          <IconButton variant={variant}>
-            <AiFillLinkedin />
-          </IconButton>
-        </a>
+          <a
+            href={shareURIs["linkedin"]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconButton variant={variant}>
+              <AiFillLinkedin />
+            </IconButton>
+          </a>
+        </Tooltip>
 
-        <a
-          href={shareURIs["twitter"]}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Tooltip
+          content="Share on Linkedin"
+          placement={horizontal ? "top" : "left"}
         >
-          <IconButton variant={variant} className={classes["button"]}>
-            <AiOutlineTwitter />
-          </IconButton>
-        </a>
+          <a
+            href={shareURIs["twitter"]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconButton variant={variant} className={classes["button"]}>
+              <AiOutlineTwitter />
+            </IconButton>
+          </a>
+        </Tooltip>
 
-        <a
-          href={shareURIs["facebook"]}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Tooltip
+          content="Share on Facebook"
+          placement={horizontal ? "top" : "left"}
         >
-          <IconButton variant={variant} className={classes["button"]}>
-            <FaFacebook />
-          </IconButton>
-        </a>
+          <a
+            href={shareURIs["facebook"]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconButton variant={variant} className={classes["button"]}>
+              <FaFacebook />
+            </IconButton>
+          </a>
+        </Tooltip>
 
-        <a href={shareURIs["email"]} target="_blank" rel="noopener noreferrer">
-          <IconButton variant={variant} className={classes["button"]}>
-            <MdAlternateEmail />
-          </IconButton>
-        </a>
-
-        <IconButton
-          variant={variant}
-          className={classes["button"]}
-          onClick={() => copyToClipboard(postURL)}
+        <Tooltip
+          content="Share via Email"
+          placement={horizontal ? "top" : "left"}
         >
-          <AiOutlineLink />
-        </IconButton>
+          <a
+            href={shareURIs["email"]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconButton variant={variant} className={classes["button"]}>
+              <MdAlternateEmail />
+            </IconButton>
+          </a>
+        </Tooltip>
+
+        <Tooltip content="Copy URL" placement={horizontal ? "top" : "left"}>
+          <div>
+            <IconButton
+              variant={variant}
+              className={classes["button"]}
+              onClick={() => copyToClipboard(postURL)}
+            >
+              <AiOutlineLink />
+            </IconButton>
+          </div>
+        </Tooltip>
       </div>
     </div>
   );
