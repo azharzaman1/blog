@@ -9,7 +9,7 @@ const LinkPreviewWidget = ({ href }) => {
       <iframe
         src={href}
         onLoad={() => setLoadingPage(false)}
-        className="w-full min-w-[50vw] min-h-[50vh]"
+        className="w-full min-w-[50vw] min-h-[60vh]"
       />
       {loadingPage && (
         <div className="iframe-loader flex items-center justify-center absolute top-0 bottom-0 left-0 right-0 bg-black/[0.3] z-10">
