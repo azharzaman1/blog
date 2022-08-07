@@ -25,11 +25,11 @@ const ImageSerializer = ({ data, className }) => {
         <div className="post-body-img-source mt-4">
           <em className="font-open-sans text-text-dim">
             [Infographic Source: Awesome{" "}
-            <Link href={data.copyright_source_url} underline>
+            <Link href={data.copyright_source_url} preview={false} underline>
               {data.copyright_source}
             </Link>{" "}
             by{" "}
-            <Link href={data.copyright_owner_url} underline>
+            <Link href={data.copyright_owner_url} preview={false} underline>
               {data.copyright_owner}
             </Link>
             ]
