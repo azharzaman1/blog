@@ -4,6 +4,7 @@ import { FaGithub, FaGlobe, FaLinkedin } from "react-icons/fa";
 import Link from "next/link";
 import ThemeLink from "../Link";
 import Image from "next/image";
+import IconButton from "../IconButton";
 
 const Header = () => {
   return (
@@ -26,19 +27,31 @@ const Header = () => {
           <div className="header-main-right">
             <div className="header-main-right-btns flex">
               <ThemeLink href="https://www.github.com/azharzaman1" blank>
-                <Button type="icon" color="bnw" className="mr-2 self-center">
+                <IconButton
+                  variant="outlined"
+                  color="bnw"
+                  className="mr-2 self-center"
+                >
                   <FaGithub className="text-gray-600" />
-                </Button>
+                </IconButton>
               </ThemeLink>
               <ThemeLink href="https://www.azharzaman.com" blank>
-                <Button type="icon" color="bnw" className="mr-2 self-center">
+                <IconButton
+                  variant="outlined"
+                  color="bnw"
+                  className="mr-2 self-center"
+                >
                   <FaGlobe className="text-gray-600" />
-                </Button>
+                </IconButton>
               </ThemeLink>
               <ThemeLink href="https://www.linkedin.com/in/azhar-zaman" blank>
-                <Button type="icon" color="bnw" className="mr-2 self-center">
+                <IconButton
+                  variant="outlined"
+                  color="bnw"
+                  className="mr-2 self-center"
+                >
                   <FaLinkedin className="text-gray-600" />
-                </Button>
+                </IconButton>
               </ThemeLink>
               <Link href="/files/azhar_resume.pdf" download>
                 <Button variant="contained" color="bnw" raised>

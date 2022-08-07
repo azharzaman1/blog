@@ -18,14 +18,15 @@ import AuthorWidget from "../../components/Blog/Generic/Widgets/Author";
 import PostComments from "components/Blog/Post/Comments";
 import useUserStatus from "hooks/useUserStatus";
 import { BiRefresh } from "react-icons/bi";
+import PostShareWidget from "components/Blog/Post/ShareWidget";
 
 const Post = ({ post }) => {
   const isAdmin = useUserStatus(false);
   const [revalidatingPost, setRevalidatingPost] = useState(false);
-  // const [revalidatingPosts, setRevalidatingPosts] = useState(false);
 
   const router = useRouter();
   const { slug } = router.query;
+  console.log(router);
 
   const postRevalidationHandler = () => {
     setRevalidatingPost(true);
@@ -48,9 +49,9 @@ const Post = ({ post }) => {
   return (
     <div className="page post-page">
       <Head>
-        <title>Blog Post Title | Azhar Blog</title>
+        <title>{post.title} | Azhar Blog</title>
       </Head>
-      <main className="post-page-content flex flex-col items-center">
+      <main className="post-page-content flex flex-col items-center relative">
         <div className="post-banner relative w-full max-w-[800px] h-56 sm:h-72 md:h-96">
           <Image
             src={urlForImage(post.mainImage).url()}
@@ -76,22 +77,19 @@ const Post = ({ post }) => {
             <div className="post-header">
               <div className="post-info mt-6 pl-2">
                 <Heading>{post.title}</Heading>
-                <div className="flex flex-col md:flex-row justify-start md:items-center mt-2">
+                <div className="flex flex-col md:flex-row justify-start md:justify-between md:items-center mt-2">
+                  <PostShareWidget
+                    slug={slug}
+                    className="block md:hidden mb-3"
+                    horizontal
+                    variant="minimal"
+                  />
+
                   <div className="blog-post-timings md:flex-[0.33]">
                     <PostTimeWidget
                       date={post.publishedAt}
                       readTime={post.readTime}
                     />
-                  </div>
-                  <div className="mt-2 md:ml-4 md:mt-0 blog-post-tags flex flex-wrap text-xs sm:text-sm items-center md:flex-[0.67]">
-                    {post.postTags.slice(0, 4).map((tag) => (
-                      <span
-                        key={tag.value}
-                        className="text-sm mx-1 sm:mx-1 md:mx-1.5 text-text-dim"
-                      >
-                        #{tag.value}
-                      </span>
-                    ))}
                   </div>
                 </div>
 
@@ -109,6 +107,12 @@ const Post = ({ post }) => {
             <PostComments _id={post._id} comments={post.comments} />
           </Container>
         </div>
+        {/* will float */}
+        <PostShareWidget
+          slug={slug}
+          className="hidden md:block fixed right-4 top-[calc(50vh)] z-10"
+          variant="minimal"
+        />
       </main>
     </div>
   );
