@@ -11,19 +11,20 @@ const PostCard = ({ post }) => {
   return (
     <div className="group">
       <div className="post-archive-card group-hover:shadow border rounded border-t-4 border-t-primary pb-4 transition-shadow duration-200 min-h-[430px]">
-        <div
-          className="post-card-banner relative w-full h-56"
-          onClick={() => navigateToPost(post.slug.current)}
-        >
-          <Image
-            src={urlForImage(post.mainImage).url()}
-            alt={post.title}
-            layout="fill"
-            objectFit="cover"
-            className="group-hover:scale-105 transition-transform duration-200"
-          />
-        </div>
-
+        <Link href={`post/${post.slug.current}`}>
+          <div
+            className="post-card-banner relative w-full h-56"
+            onClick={() => navigateToPost(post.slug.current)}
+          >
+            <Image
+              src={urlForImage(post.mainImage).url()}
+              alt={post.title}
+              layout="fill"
+              objectFit="cover"
+              className="group-hover:scale-105 transition-transform duration-200"
+            />
+          </div>
+        </Link>
         <div className="post-card-body px-4 mt-3">
           <Link href={`post/${post.slug.current}`}>
             <Heading
