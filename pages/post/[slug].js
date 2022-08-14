@@ -52,7 +52,7 @@ const Post = ({ post }) => {
       <Head>
         <title>{post.title} | Azhar Blog</title>
         {/* twitter */}
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@idrazhar" />
         {/* generic */}
         <meta property="og:type" content="article" />
