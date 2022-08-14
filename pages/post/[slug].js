@@ -90,7 +90,7 @@ const Post = ({ post }) => {
               <div className="post-info mt-6 pl-2">
                 <Heading>{post.title}</Heading>
                 <div className="flex flex-col md:flex-row justify-start md:justify-between md:items-center mt-2">
-                  <div className="blog-post-timings md:flex-[0.33]">
+                  <div className="blog-post-timings">
                     <PostTimeWidget
                       date={post.publishedAt}
                       readTime={post.readTime}
