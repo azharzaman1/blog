@@ -51,6 +51,10 @@ const Post = ({ post }) => {
     <div className="page post-page">
       <Head>
         <title>{post.title} | Azhar Blog</title>
+        {/* twitter */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:creator" content="@idrazhar" />
+        {/* generic */}
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.title} />
         <meta
