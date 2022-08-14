@@ -26,7 +26,9 @@ export const serializers = {
   em: (props) => <Italic {...props} />,
   strong: (props) => <Bold {...props} />,
   blockquote: (props) => <Qoute {...props} />,
-  link: (props) => <Link blank underline className="text-lg" {...props} />,
+  link: (props) => (
+    <Link blank underline preview={false} className="text-lg" {...props} />
+  ),
   code: (props) => <InlineCode {...props} />,
 
   // lists
