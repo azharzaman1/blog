@@ -19,6 +19,7 @@ import PostComments from "components/Blog/Post/Comments";
 import useUserStatus from "hooks/useUserStatus";
 import { BiRefresh } from "react-icons/bi";
 import PostShareWidget from "components/Blog/Post/ShareWidget";
+import { limitString } from "utils";
 
 const Post = ({ post }) => {
   const isAdmin = useUserStatus(false);
@@ -50,7 +51,12 @@ const Post = ({ post }) => {
     <div className="page post-page">
       <Head>
         <title>{post.title} | Azhar Blog</title>
+        <meta property="og:type" content="article" />
         <meta property="og:title" content={post.title} />
+        <meta
+          property="og:description"
+          content={limitString(post.excerpt, 140, true)}
+        />
         <meta property="og:image" content={urlForImage(post.mainImage).url()} />
       </Head>
       <main className="post-page-content flex flex-col items-center relative">

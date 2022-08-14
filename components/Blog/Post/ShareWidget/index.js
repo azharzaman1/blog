@@ -6,7 +6,7 @@ import {
   AiOutlineLink,
 } from "react-icons/ai";
 import { MdAlternateEmail } from "react-icons/md";
-import { FaFacebook } from "react-icons/fa";
+import { FaFacebook, FaWhatsapp } from "react-icons/fa";
 import useCopyToClipboard from "hooks/useCopyToClipboard";
 import Tooltip from "components/Generic/Tooltip";
 
@@ -72,6 +72,21 @@ const PostShareWidget = ({ slug, horizontal, variant, className }) => {
           >
             <IconButton variant={variant} className={classes["button"]}>
               <FaFacebook />
+            </IconButton>
+          </a>
+        </Tooltip>
+
+        <Tooltip
+          content="Share on Whatsapp"
+          placement={horizontal ? "top" : "left"}
+        >
+          <a
+            href={shareURIs["whatsapp"]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconButton variant={variant} className={classes["button"]}>
+              <FaWhatsapp />
             </IconButton>
           </a>
         </Tooltip>
