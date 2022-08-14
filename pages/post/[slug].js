@@ -50,6 +50,8 @@ const Post = ({ post }) => {
     <div className="page post-page">
       <Head>
         <title>{post.title} | Azhar Blog</title>
+        <meta property="og:title" content={post.title} />
+        <meta property="og:image" content={urlForImage(post.mainImage).url()} />
       </Head>
       <main className="post-page-content flex flex-col items-center relative">
         <div className="post-banner relative w-full max-w-[800px] h-56 sm:h-72 md:h-96">
