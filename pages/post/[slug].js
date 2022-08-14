@@ -78,19 +78,18 @@ const Post = ({ post }) => {
               <div className="post-info mt-6 pl-2">
                 <Heading>{post.title}</Heading>
                 <div className="flex flex-col md:flex-row justify-start md:justify-between md:items-center mt-2">
-                  <PostShareWidget
-                    slug={slug}
-                    className="block md:hidden mb-3"
-                    horizontal
-                    variant="minimal"
-                  />
-
                   <div className="blog-post-timings md:flex-[0.33]">
                     <PostTimeWidget
                       date={post.publishedAt}
                       readTime={post.readTime}
                     />
                   </div>
+                  <PostShareWidget
+                    slug={slug}
+                    className="block mt-3"
+                    horizontal
+                    variant="minimal"
+                  />
                 </div>
 
                 <div className="blog-post-author mt-4">
@@ -107,12 +106,6 @@ const Post = ({ post }) => {
             <PostComments _id={post._id} comments={post.comments} />
           </Container>
         </div>
-        {/* will float */}
-        <PostShareWidget
-          slug={slug}
-          className="hidden md:block fixed right-4 top-[calc(50vh)] z-10"
-          variant="minimal"
-        />
       </main>
     </div>
   );
