@@ -64,28 +64,28 @@ const Post = ({ post }) => {
         <meta property="og:image" content={urlForImage(post.mainImage).url()} />
       </Head>
       <main className="post-page-content flex flex-col items-center relative">
-        <div className="post-banner relative w-full max-w-[800px] h-56 sm:h-72 md:h-96">
-          <Image
-            src={urlForImage(post.mainImage).url()}
-            alt={post.title}
-            layout="fill"
-            objectFit="cover"
-            priority
-          />
-          {isAdmin && (
-            <div className="post-admin-actions flex items-center absolute right-4 top-4 text-white bg-white bg-opacity-10 rounded-full py-1.5 px-2.5">
-              <button
-                title="Revalidate"
-                className="flex items-center"
-                onClick={postRevalidationHandler}
-              >
-                <BiRefresh className={revalidatingPost && "animate-spin"} />
-              </button>
-            </div>
-          )}
-        </div>
-        <div className="post-content flex justify-center pb-16">
-          <Container maxWidth="md">
+        <Container maxWidth="md">
+          <div className="post-banner relative w-full h-56 sm:h-72 md:h-96">
+            <Image
+              src={urlForImage(post.mainImage).url()}
+              alt={post.title}
+              layout="fill"
+              objectFit="cover"
+              priority
+            />
+            {isAdmin && (
+              <div className="post-admin-actions flex items-center absolute right-4 top-4 text-white bg-white bg-opacity-10 rounded-full py-1.5 px-2.5">
+                <button
+                  title="Revalidate"
+                  className="flex items-center"
+                  onClick={postRevalidationHandler}
+                >
+                  <BiRefresh className={revalidatingPost && "animate-spin"} />
+                </button>
+              </div>
+            )}
+          </div>
+          <div className="post-content flex-col pb-16">
             <div className="post-header">
               <div className="post-info mt-6 pl-2">
                 <Heading>{post.title}</Heading>
@@ -116,8 +116,8 @@ const Post = ({ post }) => {
             </div>
             <PostBody content={post.body} />
             <PostComments _id={post._id} comments={post.comments} />
-          </Container>
-        </div>
+          </div>
+        </Container>
       </main>
     </div>
   );
