@@ -36,7 +36,7 @@ export default {
     {
       name: "mainImage",
       title: "Main image",
-      description: "Use (384px * 900px) for best results",
+      description: "Use 2.13:1 for best results",
       type: "image",
       fields: [
         {

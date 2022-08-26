@@ -7,16 +7,30 @@ import Image from "next/image";
 const AuthorWidget = ({
   avatarUrl,
   name,
+  variant,
   externalURL,
   description,
   className,
 }) => {
   return (
-    <div className={`author flex items-center ${className}`}>
-      <div className="author-image rounded-full">
-        <Image src={avatarUrl} alt={name} width={40} height={40} />
+    <div
+      className={`author flex ${
+        variant === "inline" ? "flex-row" : "flex-col"
+      } items-center ${className}`}
+    >
+      <div className="author-image rounded-full flex items-center justify-center bg-gray-200">
+        <Image
+          src={avatarUrl}
+          alt={name}
+          width={variant === "inline" ? 40 : 75}
+          height={variant === "inline" ? 40 : 75}
+        />
       </div>
-      <div className="author-info ml-2 flex flex-col items-start justify-start">
+      <div
+        className={`author-info ml-2 flex flex-col ${
+          variant === "inline" ? "items-start justify-start" : "items-center"
+        }`}
+      >
         <Link href={externalURL || "#"} blank>
           {name}
         </Link>

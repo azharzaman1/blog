@@ -10,7 +10,6 @@ import {
 } from "@lib/sanity/queries";
 import client, { getClient, urlForImage } from "@lib/sanity";
 import BlogLayout from "../../components/Blog/Layout";
-import Container from "../../components/Generic/Layout/Container";
 import Heading from "../../components/Generic/Heading";
 import PostTimeWidget from "../../components/Blog/Generic/Widgets/PostTime";
 import PostBody from "../../components/Blog/Post/PostBody";
@@ -64,60 +63,59 @@ const Post = ({ post }) => {
         <meta property="og:image" content={urlForImage(post.mainImage).url()} />
       </Head>
       <main className="post-page-content flex flex-col items-center relative">
-        <Container maxWidth="md">
-          <div className="post-banner relative w-full h-56 sm:h-72 md:h-96">
-            <Image
-              src={urlForImage(post.mainImage).url()}
-              alt={post.title}
-              layout="fill"
-              objectFit="cover"
-              priority
-            />
-            {isAdmin && (
-              <div className="post-admin-actions flex items-center absolute right-4 top-4 text-white bg-white bg-opacity-10 rounded-full py-1.5 px-2.5">
-                <button
-                  title="Revalidate"
-                  className="flex items-center"
-                  onClick={postRevalidationHandler}
-                >
-                  <BiRefresh className={revalidatingPost && "animate-spin"} />
-                </button>
+        <div className="post-banner relative w-full h-64 sm:h-96 md:h-[480px] max-w-5xl">
+          <Image
+            src={urlForImage(post.mainImage).url()}
+            alt={post.title}
+            layout="fill"
+            objectFit="cover"
+            priority
+          />
+          {isAdmin && (
+            <div className="post-admin-actions flex items-center absolute right-4 top-4 text-white bg-white bg-opacity-10 rounded-full py-1.5 px-2.5">
+              <button
+                title="Revalidate"
+                className="flex items-center"
+                onClick={postRevalidationHandler}
+              >
+                <BiRefresh className={revalidatingPost && "animate-spin"} />
+              </button>
+            </div>
+          )}
+        </div>
+        <div className="post-content flex-col pb-16 px-8 max-w-5xl">
+          <div className="post-header">
+            <div className="post-info mt-6 pl-2">
+              <Heading>{post.title}</Heading>
+              <div className="flex flex-col md:flex-row justify-start md:justify-between md:items-center mt-2">
+                <div className="blog-post-timings">
+                  <PostTimeWidget
+                    date={post.publishedAt}
+                    readTime={post.readTime}
+                  />
+                </div>
+                <PostShareWidget
+                  slug={slug}
+                  className="block mt-3"
+                  horizontal
+                  variant="minimal"
+                />
               </div>
-            )}
-          </div>
-          <div className="post-content flex-col pb-16">
-            <div className="post-header">
-              <div className="post-info mt-6 pl-2">
-                <Heading>{post.title}</Heading>
-                <div className="flex flex-col md:flex-row justify-start md:justify-between md:items-center mt-2">
-                  <div className="blog-post-timings">
-                    <PostTimeWidget
-                      date={post.publishedAt}
-                      readTime={post.readTime}
-                    />
-                  </div>
-                  <PostShareWidget
-                    slug={slug}
-                    className="block mt-3"
-                    horizontal
-                    variant="minimal"
-                  />
-                </div>
 
-                <div className="blog-post-author mt-4">
-                  <AuthorWidget
-                    name={post.author.name}
-                    description={post.author.tagline}
-                    avatarUrl={urlForImage(post.author.image).url()}
-                    externalURL="https://www.azharzaman.com"
-                  />
-                </div>
+              <div className="blog-post-author mt-4">
+                <AuthorWidget
+                  variant="inline"
+                  name={post.author.name}
+                  description={post.author.tagline}
+                  avatarUrl={urlForImage(post.author.image).url()}
+                  externalURL="https://www.azharzaman.com"
+                />
               </div>
             </div>
-            <PostBody content={post.body} />
-            <PostComments _id={post._id} comments={post.comments} />
           </div>
-        </Container>
+          <PostBody content={post.body} />
+          <PostComments _id={post._id} comments={post.comments} />
+        </div>
       </main>
     </div>
   );

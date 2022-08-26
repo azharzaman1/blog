@@ -1,23 +1,25 @@
 import Head from "next/head";
 import client from "@lib/sanity";
 import { getAllPostsQuery } from "@lib/sanity/queries";
-import BlogLayout from "../components/Blog/Layout";
 import Blog from "../components/pages/Blog";
+import Footer from "components/Generic/Footer";
+import Header from "components/Generic/Header";
 export default function Home({ posts }) {
   return (
     <div className="page home-page">
       <Head>
         <title>Blog - Azhar Zaman</title>
       </Head>
-
+      <Header />
       <main className="blog-container">
         <Blog posts={posts} />
       </main>
+      <Footer />
     </div>
   );
 }
 
-Home.getLayout = (page) => <BlogLayout>{page}</BlogLayout>;
+// Home.getLayout = (page) => <BlogLayout>{page}</BlogLayout>;
 
 export const getServerSideProps = async (ctx) => {
   const posts = await client.fetch(getAllPostsQuery);
