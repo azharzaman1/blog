@@ -47,7 +47,7 @@ const PostShareWidget = ({ slug, horizontal, variant, className }) => {
         </Tooltip>
 
         <Tooltip
-          content="Share on Linkedin"
+          content="Share on Twitter"
           placement={horizontal ? "top" : "left"}
         >
           <a
