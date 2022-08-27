@@ -3,6 +3,7 @@ import Head from "next/head";
 import { v4 } from "uuid";
 import Wrappers from "components/app/Wrappers";
 import "../styles/globals.css";
+import "react-medium-image-zoom/dist/styles.css";
 
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout ?? ((page) => page);

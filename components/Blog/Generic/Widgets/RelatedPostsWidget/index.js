@@ -1,6 +1,6 @@
 import React from "react";
 import RelatedPost from "./RelatedPost";
-import client, { urlForImage } from "@lib/sanity";
+import client, { imageBuilder } from "@lib/sanity";
 import { useEffect } from "react";
 import { getRelatedPostsQuery } from "@lib/sanity/queries";
 import { useState } from "react";
@@ -47,7 +47,7 @@ const RelatedPostsWidget = ({ className }) => {
                 key={post._id}
                 post={{
                   title: post.title,
-                  mainImage: urlForImage(post.mainImage).url(),
+                  mainImage: imageBuilder(post.mainImage).url(),
                   slug: post.slug.current,
                 }}
               />

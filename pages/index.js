@@ -19,8 +19,6 @@ export default function Home({ posts }) {
   );
 }
 
-// Home.getLayout = (page) => <BlogLayout>{page}</BlogLayout>;
-
 export const getServerSideProps = async (ctx) => {
   const posts = await client.fetch(getAllPostsQuery);
   return {

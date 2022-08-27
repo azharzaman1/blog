@@ -8,7 +8,7 @@ import {
   getPostBySlugQuery,
   getPostPathsQuery,
 } from "@lib/sanity/queries";
-import client, { getClient, urlForImage } from "@lib/sanity";
+import client, { getClient, imageBuilder } from "@lib/sanity";
 import BlogLayout from "../../components/Blog/Layout";
 import Heading from "../../components/Generic/Heading";
 import PostTimeWidget from "../../components/Blog/Generic/Widgets/PostTime";
@@ -60,12 +60,15 @@ const Post = ({ post }) => {
           property="og:description"
           content={limitString(post.excerpt, 140, true)}
         />
-        <meta property="og:image" content={urlForImage(post.mainImage).url()} />
+        <meta
+          property="og:image"
+          content={imageBuilder(post.mainImage).url()}
+        />
       </Head>
       <main className="post-page-content flex flex-col items-center relative">
         <div className="post-banner relative w-full h-64 sm:h-96 md:h-[480px] max-w-5xl">
           <Image
-            src={urlForImage(post.mainImage).url()}
+            src={imageBuilder(post.mainImage).url()}
             alt={post.title}
             layout="fill"
             objectFit="cover"
@@ -107,7 +110,7 @@ const Post = ({ post }) => {
                   variant="inline"
                   name={post.author.name}
                   description={post.author.tagline}
-                  avatarUrl={urlForImage(post.author.image).url()}
+                  avatarUrl={imageBuilder(post.author.image).url()}
                   externalURL="https://www.azharzaman.com"
                 />
               </div>

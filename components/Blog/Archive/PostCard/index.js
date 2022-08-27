@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { urlForImage } from "@lib/sanity";
+import { imageBuilder } from "@lib/sanity";
 import { limitString } from "../../../../utils";
 import Heading from "../../../Generic/Heading";
 import Text from "../../../Generic/Text";
@@ -14,7 +14,7 @@ const PostCard = ({ post }) => {
         <Link href={`post/${post.slug.current}`}>
           <div className="post-card-banner relative w-full h-56">
             <Image
-              src={urlForImage(post.mainImage).url()}
+              src={imageBuilder(post.mainImage).url()}
               alt={post.title}
               layout="fill"
               objectFit="cover"
