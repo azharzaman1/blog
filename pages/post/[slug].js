@@ -26,7 +26,6 @@ const Post = ({ post }) => {
 
   const router = useRouter();
   const { slug } = router.query;
-  console.log(router);
 
   const postRevalidationHandler = () => {
     setRevalidatingPost(true);

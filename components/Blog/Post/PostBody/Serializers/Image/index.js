@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { imageBuilder } from "@lib/sanity";
 import Image from "next/image";
-import Link from "../Link";
 import Zoom from "react-medium-image-zoom";
+import { useNextSanityImage } from "next-sanity-image";
+import { imageBuilder, sanityClient2 } from "@lib/sanity";
+import Link from "../Link";
 
 const ImageSerializer = ({ data, className }) => {
-  const image = imageBuilder(data.asset);
+  const imageProps = useNextSanityImage(sanityClient2, data.asset);
 
   return (
     <div
@@ -15,14 +16,19 @@ const ImageSerializer = ({ data, className }) => {
       {data.caption && (
         <span className="font-medium text-lg mt-4 mb-2">{data.caption}</span>
       )}
-      <div className="relative w-full bg-red-400 flex justify-center">
+      {/* sm:w-3/5 md:w-2/3 */}
+      <div
+        className={`block w-full max-w-[100vw]`}
+        style={{ width: imageProps.width }}
+      >
         <Zoom>
           <Image
-            src={image.url()}
+            {...imageProps}
+            layout="responsive"
             alt={data.alt}
-            width={500}
-            height={350}
-            objectFit="contain"
+            sizes="(min-width: 1200px) 75vw,
+              (min-width: 900px) 100vw,
+              100vw"
           />
         </Zoom>
       </div>
