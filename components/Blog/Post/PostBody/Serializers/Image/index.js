@@ -17,7 +17,10 @@ const ImageSerializer = ({ data, className }) => {
         <span className="font-medium text-lg mt-4 mb-2">{data.caption}</span>
       )}
       {/* sm:w-3/5 md:w-2/3 */}
-      <div className={`block max-w-[67%]`} style={{ width: imageProps.width }}>
+      <div
+        className={`block max-w-[350px] sm:max-w-md md:max-w-xl lg:max-w-3xl`}
+        style={{ width: imageProps.width }}
+      >
         <Zoom>
           <Image
             {...imageProps}
