@@ -8,7 +8,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "prebuild": "echo 'Installing deps' && npm install && npm install @sanity/cli",
+    "prebuild": "echo 'Installing deps' && npm install --legacy-peer-deps && npm install @sanity/cli --legacy-peer-deps",
     "build": "sanity build ../public/studio -y"
   },
   "keywords": [
