@@ -116,6 +116,7 @@ const Post = ({ post }) => {
             </div>
           </div>
           <PostBody content={post.body} />
+
           {/* <PostComments _id={post._id} comments={post.comments} /> */}
         </div>
       </main>
