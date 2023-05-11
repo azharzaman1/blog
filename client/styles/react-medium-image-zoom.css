@@ -1,0 +1,6 @@
+[data-rmiz-btn-zoom],
+[data-rmiz-btn-unzoom] {
+  background-color: var(--primary) !important;
+  cursor: pointer !important;
+  margin: 0 1rem 0 0 !important;
+}

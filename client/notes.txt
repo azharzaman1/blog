@@ -1,0 +1,7 @@
+Additions: 
+   image enlarge feature - priority
+   item detail tooltip feature
+
+Improvements: 
+   add reply feature
+   add toast
