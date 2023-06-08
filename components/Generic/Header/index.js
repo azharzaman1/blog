@@ -53,7 +53,10 @@ const Header = () => {
                   <FaLinkedin className="text-gray-600" />
                 </IconButton>
               </ThemeLink>
-              <Link href="/files/azhar_resume.pdf" download>
+              <Link
+                href="https://media.graphassets.com/4O2IJQRCRj2dmB4pizhc"
+                download
+              >
                 <Button variant="contained" color="bnw" raised>
                   Resume
                 </Button>
