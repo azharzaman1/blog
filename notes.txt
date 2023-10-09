@@ -5,3 +5,8 @@ Additions:
 Improvements: 
    add reply feature
    add toast
+
+   "prebuild": "echo 'Building Sanity to public/studio' && cd studio && npm run build && echo 'Sanity build complete at public/studio'",
+
+    "prebuild": "echo 'Installing Sanity Dependencies...' && npm install --legacy-peer-deps && echo 'Installing Sanity CLI...' &&  npm install @sanity/cli --legacy-peer-deps",
+    "build": "echo 'Starting Sanity Build...' && sanity build ../public/studio -y"
